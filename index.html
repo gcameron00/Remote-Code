@@ -1,17 +1,108 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
-    <title>Home</title>
-    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="/assets/css/styles.css">
-    <script defer src="/assets/js/main.js"></script>
+    <title>Music Catalogue</title>
+    <meta name="description" content="Browse a personal collection of LPs, CDs, Cassettes and more." />
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
   </head>
   <body>
-    <h1>It works 🎉</h1>
-    <p>This site is deployed using Cloudflare Pages.</p>
-    <p><a href="/about/">About</a></p>
+
+    <!-- ── Header ── -->
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="site-title" href="/">&#9835; My Collection</a>
+        <div class="header-search">
+          <input id="searchInput" type="search" placeholder="Search artist, title, label&hellip;" autocomplete="off" />
+        </div>
+        <div class="header-actions">
+          <button id="filterToggle" class="filter-toggle-btn">&#9776; Filters</button>
+          <button id="viewGrid" class="view-btn active" aria-label="Grid view">&#9632; Grid</button>
+          <button id="viewFlow" class="view-btn"        aria-label="Cover flow">&#9670; Flow</button>
+          <a class="admin-link" href="/admin/">Admin</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ── Main ── -->
+    <div class="site-main">
+
+      <!-- Sidebar filters -->
+      <aside class="filter-panel" id="filterPanel">
+        <div class="filter-section">
+          <h4>Media Type</h4>
+          <div class="filter-list" id="filterMediaType"></div>
+        </div>
+        <div class="filter-section">
+          <h4>Genre</h4>
+          <div class="filter-list" id="filterGenre"></div>
+        </div>
+        <div class="filter-section">
+          <h4>Condition</h4>
+          <div class="filter-list" id="filterCondition"></div>
+        </div>
+        <div class="filter-section filter-sort">
+          <h4>Sort by</h4>
+          <select id="sortSelect">
+            <option value="artist">Artist A–Z</option>
+            <option value="title">Title A–Z</option>
+            <option value="year">Year (oldest)</option>
+            <option value="year-desc">Year (newest)</option>
+          </select>
+        </div>
+        <button id="clearFilters" class="filter-clear hidden">Clear all filters</button>
+      </aside>
+
+      <!-- Content -->
+      <main class="content-area">
+        <div class="results-bar">
+          <span id="resultsCount" class="results-count"></span>
+        </div>
+
+        <!-- Grid view -->
+        <div id="catalogueGrid" class="catalogue-grid"></div>
+
+        <!-- Cover flow view -->
+        <div id="cfSection" class="coverflow-section hidden">
+          <button id="cfPrev" class="cf-nav cf-prev" aria-label="Previous">&#8249;</button>
+          <button id="cfNext" class="cf-nav cf-next" aria-label="Next">&#8250;</button>
+          <div id="cfStage" class="coverflow-stage"></div>
+          <div class="coverflow-info">
+            <div id="cfArtist" class="cf-info-artist"></div>
+            <div id="cfTitle"  class="cf-info-title"></div>
+            <div id="cfMeta"   class="cf-info-meta"></div>
+          </div>
+          <button id="cfOpenBtn" class="cf-open-btn">View details</button>
+        </div>
+      </main>
+    </div>
+
+    <!-- ── Detail Modal ── -->
+    <div id="modalOverlay" class="modal-overlay hidden" role="dialog" aria-modal="true">
+      <div class="modal">
+        <button id="modalClose" class="modal-close" aria-label="Close">&times;</button>
+        <div class="modal-body">
+          <img id="modalCover" class="modal-cover" src="" alt="" />
+          <div class="modal-meta">
+            <div id="modalArtist"  class="modal-artist"></div>
+            <div id="modalTitle"   class="modal-title"></div>
+            <div id="modalDetails" class="modal-details"></div>
+            <div id="modalLabel"   class="modal-label"></div>
+            <div id="modalGenres"  class="modal-genres"></div>
+            <div id="modalNotes"   class="modal-notes hidden"></div>
+          </div>
+        </div>
+        <div id="modalTracklist" class="modal-tracklist hidden"></div>
+        <div class="modal-nav">
+          <button id="modalPrev" class="modal-nav-btn">&#8592; Prev</button>
+          <button id="modalNext" class="modal-nav-btn">Next &#8594;</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/assets/js/app.js"></script>
   </body>
 </html>
