@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Admin – Music Catalogue</title>
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+  </head>
+  <body>
+
+    <!-- ── PIN Gate ── -->
+    <div id="pinGate" class="pin-gate">
+      <div class="pin-box">
+        <h2>&#128274; Admin Access</h2>
+        <p>Enter your PIN to manage the catalogue.</p>
+        <input id="pinInput" class="pin-input" type="password"
+               inputmode="numeric" maxlength="8" placeholder="&bull;&bull;&bull;&bull;" autocomplete="off" />
+        <button id="pinSubmit" class="btn btn-primary" style="width:100%">Unlock</button>
+        <p class="pin-hint">Demo PIN: <strong>1234</strong></p>
+      </div>
+    </div>
+
+    <!-- ── Admin Content ── -->
+    <div id="adminContent" class="hidden">
+      <div class="admin-page">
+        <div class="admin-header">
+          <h1>&#9835; Admin Panel</h1>
+          <a href="/" class="btn btn-secondary">&#8592; View Site</a>
+          <button id="addBtn"      class="btn btn-primary">+ Add Record</button>
+          <button id="resetBtn"    class="btn btn-secondary">Reset to Defaults</button>
+          <button id="changePinBtn" class="btn btn-secondary">Change PIN</button>
+          <button id="logoutBtn"   class="btn btn-secondary">Logout</button>
+        </div>
+        <div id="statsBar" class="admin-stats"></div>
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Artist</th>
+                <th>Title</th>
+                <th>Year</th>
+                <th>Type</th>
+                <th>Condition</th>
+                <th style="text-align:right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="recordTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Add / Edit Form Modal ── -->
+    <div id="formOverlay" class="form-modal-overlay hidden">
+      <div class="form-modal">
+        <h2 id="formTitle">Add Record</h2>
+        <form id="recordForm" novalidate>
+          <div class="form-grid">
+            <div class="form-group full">
+              <label for="f-title">Title *</label>
+              <input id="f-title" name="title" type="text" required autocomplete="off" />
+            </div>
+            <div class="form-group full">
+              <label for="f-artist">Artist *</label>
+              <input id="f-artist" name="artist" type="text" required autocomplete="off" />
+            </div>
+            <div class="form-group">
+              <label for="f-year">Year</label>
+              <input id="f-year" name="year" type="number" min="1900" max="2099" />
+            </div>
+            <div class="form-group">
+              <label for="f-label">Label</label>
+              <input id="f-label" name="label" type="text" autocomplete="off" />
+            </div>
+            <div class="form-group">
+              <label for="f-mediaType">Media Type</label>
+              <select id="f-mediaType" name="mediaType">
+                <option>LP</option><option>CD</option><option>Cassette</option>
+                <option>7-inch</option><option>12-inch</option><option>MiniDisc</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="f-condition">Condition</label>
+              <select id="f-condition" name="condition">
+                <option>Mint</option><option>VG+</option><option>VG</option>
+                <option>Good</option><option>Poor</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label for="f-genres">Genres <span style="font-weight:400">(comma-separated)</span></label>
+              <input id="f-genres" name="genres" type="text" placeholder="e.g. Rock, Soul, Funk" />
+            </div>
+            <div class="form-group full">
+              <label for="f-coverUrl">Cover Image URL <span style="font-weight:400">(optional)</span></label>
+              <input id="f-coverUrl" name="coverUrl" type="url" placeholder="https://…" />
+            </div>
+            <div class="form-group full">
+              <label for="f-notes">Notes</label>
+              <textarea id="f-notes" name="notes" placeholder="Pressing details, sleeve condition…"></textarea>
+            </div>
+            <div class="form-group full">
+              <label for="f-tracklist">Tracklist <span style="font-weight:400">(one track per line)</span></label>
+              <textarea id="f-tracklist" name="tracklist" style="min-height:120px"></textarea>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="button" id="formCancel" class="btn btn-secondary">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Record</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script type="module" src="/assets/js/admin.js"></script>
+  </body>
+</html>
